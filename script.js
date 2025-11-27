@@ -1,31 +1,26 @@
-const images = document.querySelectorAll(".image");
-let store = null;
+const boxes = document.querySelectorAll(".image");
 
-images.forEach((img) => {
-  img.addEventListener("dragstart", (e) => {
-    store = e.target;
-    e.target.classList.add("dragging");
+let draggedElement = null;
+
+boxes.forEach(box => {
+  box.addEventListener("dragstart", (e) => {
+    draggedElement = e.target;
   });
 
-  img.addEventListener("dragend", (e) => {
-    e.target.classList.remove("dragging");
+  box.addEventListener("dragover", (e) => {
+    e.preventDefault(); // Allow drop
   });
 
-  img.addEventListener("dragover", (e) => {
+  box.addEventListener("drop", (e) => {
     e.preventDefault();
-  });
 
-  img.addEventListener("drop", (e) => {
-    e.preventDefault();
     const target = e.target;
 
-    if (store !== target) {
-      const storeNext = store.nextSibling;
-      const targetNext = target.nextSibling;
-
-      
-      store.parentNode.insertBefore(target, storeNext);
-      target.parentNode.insertBefore(store, targetNext);
+    if (target !== draggedElement) {
+      // Swap background images
+      let temp = draggedElement.style.backgroundImage;
+      draggedElement.style.backgroundImage = target.style.backgroundImage;
+      target.style.backgroundImage = temp;
     }
   });
 });
