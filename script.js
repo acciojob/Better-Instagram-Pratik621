@@ -1,7 +1,7 @@
-   const drag=document.querySelectorAll(".image");
+   const drag1=document.querySelectorAll(".image");
    
    let store;
-   drag.forEach((box)=>{
+   drag1.forEach((box)=>{
     box.addEventListener("dragstart",(e)=>{
       store=e.target;
       e.target.classList.add("dragging!")
