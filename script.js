@@ -23,7 +23,7 @@ images.forEach((img) => {
       const storeNext = store.nextSibling;
       const targetNext = target.nextSibling;
 
-      // Swap using actual nodes (keeps event listeners)
+      
       store.parentNode.insertBefore(target, storeNext);
       target.parentNode.insertBefore(store, targetNext);
     }
