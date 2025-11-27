@@ -1,10 +1,31 @@
-//your code here
-const image1=document.querSelector("#div1")
-const image2=document.querSelector("#div2")
-const image3=document.querSelector("#div3")
-const image4=document.querSelector("#div4")
-const image5=document.querSelector("#div5")
-const image6=document.querSelector("#div6")
+   const drag=document.querySelectorAll(".image");
+   
+   let store;
+   drag.forEach((box)=>{
+    box.addEventListener("dragstart",(e)=>{
+      store=e.target;
+      e.target.classList.add("dragging!")
+    })
 
-const main=document.querSelector("#parent")
-main.innerHtml=
+    box.addEventListener("dragned",(e)=>{
+      e.target.clasList.remove("dragging!")
+    })
+    box.addEventListener("dragover",(e)=>{
+      e.preventDefault();
+
+    })
+    box.addEventListener("drop",(e)=>{
+      e.preventDefault();
+      const target=e.target
+      if(target!==store){
+        const dragClone=store.cloneNode(true);
+        const targetClone=target.cloneNode(true);
+        store.replaceWith(targetClone)
+        e.target.replaceWith(dragClone)
+      }
+
+    })
+   })
+   
+   
+    
