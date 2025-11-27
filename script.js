@@ -1,5 +1,5 @@
 const images = document.querySelectorAll(".image");
-let store = null;
+let store;
 
 images.forEach((img) => {
   img.addEventListener("dragstart", (e) => {
@@ -16,6 +16,7 @@ images.forEach((img) => {
     const target = e.target;
 
     if (store !== target) {
+		
       const storeNext = store.nextSibling;
       const targetNext = target.nextSibling;
       
