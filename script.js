@@ -1,20 +1,20 @@
    const drag1=document.querySelectorAll(".image");
    
    let store;
-   drag1.forEach((box)=>{
-    box.addEventListener("dragstart",(e)=>{
+   for(let index=1;index<=6;index++){
+    drag${index}.addEventListener("dragstart",(e)=>{
       store=e.target;
       e.target.classList.add("dragging!")
     })
 
-    box.addEventListener("dragned",(e)=>{
+    drag${index}.addEventListener("dragned",(e)=>{
       e.target.clasList.remove("dragging!")
     })
-    box.addEventListener("dragover",(e)=>{
+    drag${index}.addEventListener("dragover",(e)=>{
       e.preventDefault();
 
     })
-    box.addEventListener("drop",(e)=>{
+    drag${index}.addEventListener("drop",(e)=>{
       e.preventDefault();
       const target=e.target
       if(target!==store){
@@ -25,7 +25,7 @@
       }
 
     })
-   })
+   }
    
    
     
