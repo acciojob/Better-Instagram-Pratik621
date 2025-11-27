@@ -4,7 +4,6 @@ let store = null;
 images.forEach((img) => {
   img.addEventListener("dragstart", (e) => {
     store = e.target;
-    
   });
 
 
@@ -19,7 +18,6 @@ images.forEach((img) => {
     if (store !== target) {
       const storeNext = store.nextSibling;
       const targetNext = target.nextSibling;
-
       
       store.parentNode.insertBefore(target, storeNext);
       target.parentNode.insertBefore(store, targetNext);
