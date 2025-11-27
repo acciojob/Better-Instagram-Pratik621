@@ -1,33 +1,31 @@
-const boxes = document.querySelectorAll(".image");
+const images = document.querySelectorAll(".image");
+let store = null;
 
-let draggedElement = null;
-
-boxes.forEach(box => {
-  // Start dragging
-  box.addEventListener("dragstart", (e) => {
-    draggedElement = e.target;
+images.forEach((img) => {
+  img.addEventListener("dragstart", (e) => {
+    store = e.target;
+    e.target.classList.add("dragging");
   });
 
-  // Allow drop
-  box.addEventListener("dragover", (e) => {
+  img.addEventListener("dragend", (e) => {
+    e.target.classList.remove("dragging");
+  });
+
+  img.addEventListener("dragover", (e) => {
     e.preventDefault();
   });
 
-  // Swap background or content on drop
-  box.addEventListener("drop", (e) => {
+  img.addEventListener("drop", (e) => {
     e.preventDefault();
     const target = e.target;
 
-    if (target !== draggedElement) {
-      // Swap inner text (optional: you can swap background images)
-      const temp = draggedElement.innerHTML;
-      draggedElement.innerHTML = target.innerHTML;
-      target.innerHTML = temp;
+    if (store !== target) {
+      const storeNext = store.nextSibling;
+      const targetNext = target.nextSibling;
 
-      // If using background images instead of text:
-      // const tempBG = draggedElement.style.backgroundImage;
-      // draggedElement.style.backgroundImage = target.style.backgroundImage;
-      // target.style.backgroundImage = tempBG;
+      // Swap using actual nodes (keeps event listeners)
+      store.parentNode.insertBefore(target, storeNext);
+      target.parentNode.insertBefore(store, targetNext);
     }
   });
 });
